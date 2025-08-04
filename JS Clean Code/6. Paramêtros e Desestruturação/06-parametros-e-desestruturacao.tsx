@@ -1,11 +1,13 @@
-function updateUserRoute(body, params) {
-  updateUserController(body, params);
+function updateUserRoute(requestBody, routeParams) {
+  updateUserController(requestBody, routeParams);
 }
 
-function updateUserController(data, params) {
-  userRepository.update(data, params);
+function updateUserController(userData, userParams) {
+  userRepository.update(userData, userParams);
 }
 
 const userRepository = {
-  update: (data, params) => {},
+  update(userData, userParams) {
+    // Update logic here
+  },
 };

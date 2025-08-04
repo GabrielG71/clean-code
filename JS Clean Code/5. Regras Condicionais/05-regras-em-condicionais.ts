@@ -1,26 +1,26 @@
-const necessaryGradeToBeApproved = 7;
+const PASSING_GRADE = 7;
+const MAX_ABSENCES = 100;
+
 const studentGrade = 10;
+const studentAbsences = 109;
 
-const numberOfAbsensesToFailSchool = 100;
-const studentNumberOfAbsenses = 109;
-
-function checkIfStudentPassedTheSchoolYear() {
-  if (studentGrade < necessaryGradeToBeApproved) {
+function evaluateStudentPerformance() {
+  if (studentGrade < PASSING_GRADE) {
     return {
       error: true,
       message:
-        "Student was not approved because his grade was below the necessary.",
+        "Student was not approved because their grade was below the required.",
     };
-  } else {
-    if (studentNumberOfAbsenses > numberOfAbsensesToFailSchool) {
-      return {
-        error: true,
-        message: "Student was not approved because of his absenses",
-      };
-    } else {
-      return { error: false, message: "Student was approved :)" };
-    }
   }
+
+  if (studentAbsences > MAX_ABSENCES) {
+    return {
+      error: true,
+      message: "Student was not approved due to excessive absences.",
+    };
+  }
+
+  return { error: false, message: "Student was approved :)" };
 }
 
-console.log(checkIfStudentPassedTheSchoolYear());
+console.log(evaluateStudentPerformance());
