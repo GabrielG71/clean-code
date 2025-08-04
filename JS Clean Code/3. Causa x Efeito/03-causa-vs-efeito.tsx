@@ -1,4 +1,3 @@
-// Causa vs Efeito
 import { useEffect, useState } from "react";
 
 interface User {
@@ -18,24 +17,24 @@ function fetchUser() {
 }
 
 export function UserProfile() {
-  const [shouldNotRenderUserName, setShouldNotRenderUserName] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState<User>();
 
   useEffect(() => {
     function loadUser() {
-      setShouldNotRenderUserName(true);
+      setIsLoading(true);
 
       const fetchUserResponse = fetchUser();
 
       setUserData(fetchUserResponse.data.user);
 
-      setShouldNotRenderUserName(false);
+      setIsLoading(false);
     }
 
     loadUser();
-  });
+  }, []);
 
-  if (shouldNotRenderUserName) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
