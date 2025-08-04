@@ -1,4 +1,3 @@
-// Código em inglês
 import { useState } from "react";
 
 interface Product {
@@ -6,36 +5,39 @@ interface Product {
   price: string;
 }
 
-const productList = [
+const productList: Product[] = [
   {
-    title: "Macarrão",
+    title: "Pasta",
     price: "R$ 25,00",
   },
   {
-    title: "Hamburger",
+    title: "Burger",
     price: "R$ 30,00",
   },
 ];
 
-export function ListProduto() {
-  const [filteredProdutos, setFilteredProdutos] = useState<Product[]>([]);
+export function ProductList() {
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-  function searchProduto(search: string) {
-    const filtrado = productList.filter((product) =>
-      product.title.includes(search)
+  function handleSearch(searchTerm: string) {
+    const filtered = productList.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
-    setFilteredProdutos(filtrado);
+    setFilteredProducts(filtered);
   }
 
   return (
     <div>
-      <input type="text" onChange={(e) => searchProduto(e.target.value)} />
+      <input
+        type="text"
+        placeholder="Search product..."
+        onChange={(e) => handleSearch(e.target.value)}
+      />
 
-      {filteredProdutos.map((produto) => (
-        <div>
-          <p>{produto.title}</p>
-          <p>{produto.price}</p>
+      {filteredProducts.map((product) => (
+        <div key={product.title}>
+          <p>{product.title}</p>
+          <p>{product.price}</p>
         </div>
       ))}
     </div>
